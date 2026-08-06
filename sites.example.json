@@ -1,0 +1,40 @@
+{
+  "sites": [
+    {
+      "name": "issabel-exemplo",
+      "url": "http://IP-DO-SERVIDOR",
+      "username": "usuario",
+      "password": "senha-aqui",
+      "selectors": {
+        "username": "input[name='username'], input[type='text'], input[id*='user']",
+        "password": "input[name='password'], input[type='password']",
+        "submit": "button[type='submit'], input[type='submit'], button:has-text('Login'), button:has-text('Entrar')"
+      },
+      "wait_after_login": 5000,
+      "wait_for_network": true,
+      "wait_for_selector": "table, .dashboard, .content, #main",
+      "screenshot_path": "screenshots/issabel-exemplo.png"
+    },
+    {
+      "name": "snep-exemplo",
+      "url": "http://IP-DO-SERVIDOR",
+      "username": "usuario",
+      "password": "senha-aqui",
+      "selectors": {
+        "username": "input[name='username'], input[type='text'], input[id*='user']",
+        "password": "input[name='password'], input[type='password']",
+        "submit": "button[type='submit'], input[type='submit'], button:has-text('Login'), button:has-text('Entrar')"
+      },
+      "viewport": { "width": 1920, "height": 953 },
+      "post_login_click": "#containerStatus",
+      "post_login_click_wait": 8000,
+      "post_login_click_wait_for_selector": "#statusbar_content",
+      "hide_fixed_notifications": false,
+      "full_page_screenshot": false,
+      "wait_after_login": 8000,
+      "wait_for_network": true,
+      "wait_for_selector": ".dashboard, #content",
+      "screenshot_path": "screenshots/snep-exemplo.png"
+    }
+  ]
+}
