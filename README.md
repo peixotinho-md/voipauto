@@ -80,7 +80,6 @@ HEADLESS=false SLOWMO=500 SITE=nome-do-servidor python3 screenshot.py
 .
 ├── screenshot.py          # Script principal (Python/Playwright)
 ├── sites.example.json     # Modelo de configuração (sem dados sensíveis)
-├── sites.json             # Configuração real (git-ignored)
 └── screenshots/           # Screenshots gerados (git-ignored)
 ```
 
