@@ -385,14 +385,24 @@ async def main():
         sites_to_run = [s for s in sites_to_run if s["name"] == only_site]
         print(f">>> Rodando apenas o site: {only_site}")
 
+    # Roda os servidores em paralelo, limitando quantos abrem ao mesmo tempo
+    # (evita sobrecarregar CPU/memória com muitas instâncias do Chromium).
+    # Ajuste com: CONCURRENCY=5 python3 screenshot.py
+    concurrency = int(os.environ.get("CONCURRENCY", "5"))
+    print(f">>> Concorrência: até {concurrency} servidor(es) simultâneo(s)")
+    semaphore = asyncio.Semaphore(concurrency)
+
+    async def run_with_limit(site, browser):
+        async with semaphore:
+            await login_and_screenshot(site, browser)
+
     async with async_playwright() as p:
         browser = await p.chromium.launch(
             headless=headless,
             slow_mo=slow_mo,
             args=["--ignore-certificate-errors"]
         )
-        for site in sites_to_run:
-            await login_and_screenshot(site, browser)
+        await asyncio.gather(*(run_with_limit(site, browser) for site in sites_to_run))
         await browser.close()
 
     print("Todos os sites processados!")
